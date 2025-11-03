@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Auto Login – Settings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="options.css" />
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="brand">
+            <div class="logo">🔐</div>
+            <div>
+                <h1>Auto Login</h1>
+                <p class="muted">ตั้งค่าให้กรอกอัตโนมัติได้ตามใจ</p>
+            </div>
+        </div>
+        <div class="status">
+            <span id="rulesCount" class="chip">Rules: 0</span>
+            <span id="jsonState" class="chip chip--ok">JSON OK</span>
+        </div>
+    </header>
+
+    <main class="container">
+        <nav class="tabs" role="tablist" aria-label="Settings Tabs">
+            <button class="tab active" data-tab="cred" role="tab" aria-selected="true">Credentials</button>
+            <button class="tab" data-tab="sites" role="tab" aria-selected="false">Sites</button>
+            <button class="tab" data-tab="tools" role="tab" aria-selected="false">Tools</button>
+        </nav>
+
+        <!-- Credentials -->
+        <section id="tab-cred" class="panel active" role="tabpanel">
+            <div class="card">
+                <h2>บัญชี (Credentials)</h2>
+                <div class="grid">
+                    <label class="field">
+                        <span>ID</span>
+                        <input id="userId" type="password" placeholder="เช่น 1234567890123" autocomplete="username" />
+                    </label>
+                    <label class="field">
+                        <span>Password</span>
+                        <div class="input-row">
+                            <input id="userPassword" type="password" placeholder="รหัสผ่าน"
+                                autocomplete="current-password" />
+                            <button id="toggleCre" class="btn ghost" title="Show/Hide">👁️</button>
+                            <button id="copyPw" class="btn ghost" title="Copy">📋</button>
+                        </div>
+                    </label>
+                </div>
+                <div class="actions">
+                    <button id="saveCred" class="btn primary">Save</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sites -->
+        <section id="tab-sites" class="panel" role="tabpanel">
+            <div class="card">
+                <h2>Site Rules</h2>
+                <p class="muted">เลือกเว็ปด้านซ้าย แล้วแก้รายละเอียดด้านขวา</p>
+
+                <div class="sites-split">
+                    <!-- Sidebar list -->
+                    <aside class="site-list">
+                        <div class="site-toolbar">
+                            <button id="addRule" class="btn">+ Add</button>
+                            <button id="dupRule" class="btn">Duplicate</button>
+                            <button id="delRule" class="btn danger">Delete</button>
+                            <button id="moveUp" class="btn ghost">↑</button>
+                            <button id="moveDown" class="btn ghost">↓</button>
+                        </div>
+                        <ul id="ruleList" class="rule-list" aria-label="Rules"></ul>
+
+                        <div class="io-toolbar">
+                            <input id="fileImport" type="file" accept=".json" hidden />
+                            <button id="importRules" class="btn">Import</button>
+                            <button id="exportRules" class="btn">Export</button>
+                        </div>
+                    </aside>
+
+                    <!-- Editor form -->
+                    <section class="site-editor">
+                        <div class="editor-grid">
+                            <label class="field">
+                                <span>Pattern (URL or regex:...)</span>
+                                <input id="edPattern" type="text"
+                                    placeholder="https://example.com or regex:^https://...$" />
+                            </label>
+
+                            <div class="field">
+                                <span>Flags</span>
+                                <div class="chip-row">
+                                    <label class="chip-toggle"><input id="edAutoRun" type="checkbox" /> autoRun</label>
+                                    <label class="chip-toggle"><input id="edCOE" type="checkbox" />
+                                        continueOnError</label>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <span>StartWhen (Builder)</span>
+                                <div class="startwhen">
+                                    <select id="edSWType">
+                                        <option value="">(none)</option>
+                                        <option value="exists">exists (selector)</option>
+                                        <option value="urlIncludes">urlIncludes (text)</option>
+                                        <option value="urlMatches">urlMatches (RegExp)</option>
+                                    </select>
+                                    <input id="edSWValue" type="text"
+                                        placeholder="เช่น input[type='text'] หรือ /login" />
+                                    <label class="chip-toggle"><input id="edSWVisible" type="checkbox" />
+                                        visible</label>
+                                    <label class="field mini">
+                                        <span>timeout (ms)</span>
+                                        <input id="edSWTimeout" type="number" min="0" step="100" placeholder="20000" />
+                                    </label>
+                                </div>
+                            </div>
+
+                            <label class="field">
+                                <span>Steps (JSON array)</span>
+                                <textarea id="edSteps" rows="12" spellcheck="false" class="code"></textarea>
+                            </label>
+
+                            <div class="actions">
+                                <div class="msg-container">
+                                    <span id="edMsg" class="muted"></span>
+                                </div>
+                                <div class="actions-right">
+                                    <button id="fmtSteps" class="btn">Format</button>
+                                    <button id="validateSteps" class="btn">Validate</button>
+                                    <button id="saveRule" class="btn primary">Save changes</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <details class="advanced">
+                            <summary>Advanced: Raw JSON (all rules)</summary>
+                            <div class="advanced-inner">
+                                <textarea id="rulesRaw" rows="12" spellcheck="false" class="code"></textarea>
+                                <div class="actions">
+                                    <button id="formatRaw" class="btn">Format</button>
+                                    <button id="saveRaw" class="btn primary">Save All</button>
+                                </div>
+                            </div>
+                        </details>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools -->
+        <section id="tab-tools" class="panel" role="tabpanel">
+            <div class="card">
+                <h2>เครื่องมือ</h2>
+                <p class="muted">เอกสารตัวอย่างคำสั่งที่รองรับ</p>
+                <button id="showDocs" class="btn docs">Open docs</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer muted">
+        <span>Tip: ใช้คีย์ลัด <span class="mono">Alt+L</span> เพื่อรัน flow บนแท็บปัจจุบัน</span>
+    </footer>
+
+    <dialog id="docsDialog">
+        <article class="card docs-card">
+            <h2>Step Cheatsheet</h2>
+            <pre class="code code--docs">
+waitFor { selector, timeout?, visible? }
+type    { selector, text? | textFrom: "userId" | "userPassword" }
+click   { selector, visible? }
+pressKey{ key, selector? }
+delay   { ms }
+submit  { selector? }
+setChecked { selector, value: true|false }
+select  { selector, value }
+runIf   { condition: { exists | urlIncludes | urlMatches }, then:[...], else:[...] }
+navigate{ url }
+log     { message }
+      </pre>
+            <div class="actions">
+                <button id="closeDocs" class="btn primary">Close</button>
+            </div>
+        </article>
+    </dialog>
+
+    <script src="options.js"></script>
+</body>
+
+</html>

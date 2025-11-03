@@ -1,0 +1,728 @@
+:root {
+    --bg: #0b1020;
+    --panel: #101835;
+    --border: #223053;
+    --text: #e9eeff;
+    --muted: #9aaccf;
+    --accent: #6ea8ff;
+    --accent2: #9dd6ff;
+    --danger: #ff6e6e;
+
+    /* Dark docs */
+    --docs-bg: #0d142b;
+    --docs-text: #e8eeff;
+    --docs-border: rgba(158, 188, 255, .12);
+    --docs-shadow: 0 18px 50px rgba(0, 10, 30, .45);
+    --docs-accent: #6ea8ff;
+    --docs-accent-soft: rgba(110, 168, 255, .15);
+    --docs-muted: #9aaccf;
+    --docs-radius: 18px;
+}
+
+* {
+    box-sizing: border-box
+}
+
+html,
+body {
+    height: 100%
+}
+
+body {
+    margin: 0;
+    background: radial-gradient(1200px 400px at 0% 0%, #12204a 0%, #0b1020 50%, #0b1020 100%);
+    color: var(--text);
+    font: 14px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(16, 24, 53, .6);
+    backdrop-filter: blur(6px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.brand {
+    display: flex;
+    gap: 12px;
+    align-items: center
+}
+
+.logo {
+    font-size: 22px
+}
+
+h1 {
+    margin: 0;
+    font-size: 16px
+}
+
+.muted {
+    color: var(--muted)
+}
+
+.status {
+    display: flex;
+    gap: 8px
+}
+
+.chip {
+    font-size: 12px;
+    padding: 4px 8px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--muted)
+}
+
+.chip--ok {
+    border-color: rgba(110, 168, 255, .4);
+    color: #cfe3ff
+}
+
+.container {
+    max-width: 1100px;
+    margin: 18px auto;
+    padding: 0 16px
+}
+
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px
+}
+
+.tab {
+    border: 1px solid var(--border);
+    color: var(--text);
+    background: transparent;
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.tab.active {
+    background: linear-gradient(180deg, rgba(110, 168, 255, .22), rgba(110, 168, 255, .08));
+    border-color: rgba(110, 168, 255, .55)
+}
+
+.panel {
+    display: none
+}
+
+.panel.active {
+    display: block
+}
+
+.card {
+    background: linear-gradient(160deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02));
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+    backdrop-filter: blur(6px);
+}
+
+h2 {
+    margin: 0 0 10px
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px
+}
+
+@media (max-width:720px) {
+    .grid {
+        grid-template-columns: 1fr
+    }
+}
+
+.field span {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px
+}
+
+.input-row {
+    display: flex;
+    gap: 8px;
+    align-items: center
+}
+
+.input-row input {
+    flex: 1
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, .05);
+    color: var(--text);
+    outline: none;
+    resize: vertical;
+    overflow: auto;
+}
+
+textarea.code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* ป้องกันปุ่มกระโดด */
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.actions-right {
+    display: flex;
+    gap: 8px;
+}
+
+#edMsg {
+    font-size: 13px;
+    opacity: .8;
+}
+
+#edMsg.ok {
+    color: #9fffa5; /* เขียว */
+}
+
+#edMsg.err {
+    color: #ff6e6e; /* แดง */
+}
+
+.msg-container {
+    min-height: 20px;     /* ป้องกันคอนเทนต์ดันปุ่ม */
+    display: flex;
+    align-items: center;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 10px 0
+}
+
+.toolbar .left,
+.toolbar .right {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap
+}
+
+.btn {
+    padding: 9px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    transition: transform .05s ease;
+}
+
+.btn:active {
+    transform: translateY(1px)
+}
+
+.btn.primary {
+    background: linear-gradient(180deg, var(--accent), var(--accent2));
+    color: #0b1020;
+    border: 0
+}
+
+.btn.ghost {
+    background: transparent
+}
+
+.btn.danger {
+    border-color: rgba(255, 110, 110, .5);
+    color: #ffdede
+}
+
+/* Sites split layout */
+.sites-split {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 14px
+}
+
+@media (max-width:980px) {
+    .sites-split {
+        grid-template-columns: 1fr
+    }
+}
+
+.site-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.site-toolbar,
+.io-toolbar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap
+}
+
+.rule-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, .03)
+}
+
+.rule-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, .06);
+    cursor: pointer
+}
+
+.rule-item:last-child {
+    border-bottom: 0
+}
+
+.rule-item:hover {
+    background: rgba(110, 168, 255, .08)
+}
+
+.rule-item.active {
+    background: linear-gradient(180deg, rgba(110, 168, 255, .18), rgba(110, 168, 255, .08));
+    border-left: 3px solid var(--accent)
+}
+
+.rule-item .pattern {
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px
+}
+
+.rule-item .badges {
+    display: flex;
+    gap: 6px
+}
+
+.badge {
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, .15);
+    color: #cfe3ff
+}
+
+.badge--off {
+    opacity: .6
+}
+
+.site-editor .editor-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px
+}
+
+.chip-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap
+}
+
+.chip-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .04)
+}
+
+.startwhen {
+    display: grid;
+    grid-template-columns: 170px 1fr 140px 160px;
+    gap: 8px;
+    align-items: center;   /* ✅ ทำให้ทุก element อยู่ระดับเดียว */
+}
+
+.startwhen .mini span {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 2px
+}
+
+.advanced {
+    margin-top: 16px
+}
+
+.advanced summary {
+    cursor: pointer;
+    padding: 8px 10px;
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    color: var(--muted)
+}
+
+.advanced[open] summary {
+    color: var(--text);
+    border-style: solid
+}
+
+.advanced-inner {
+    margin-top: 10px
+}
+
+/* Docs dark theme */
+.btn.docs {
+    background: linear-gradient(180deg, rgba(110, 168, 255, .12), rgba(110, 168, 255, .06));
+    color: var(--text);
+    border: 1px solid rgba(110, 168, 255, .35);
+    font-weight: 700;
+}
+
+dialog {
+    border: 0;
+    padding: 0;
+    background: transparent;
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, .6);
+    backdrop-filter: blur(2px);
+}
+
+.docs-card {
+    width: min(860px, calc(100vw - 48px));
+    margin: 0 auto;
+    background: var(--docs-bg);
+    color: var(--docs-text);
+    border: 1px solid var(--docs-border);
+    border-radius: var(--docs-radius);
+    box-shadow: var(--docs-shadow);
+    padding: 20px 20px 14px;
+    position: relative;
+    overflow: hidden;
+}
+
+.docs-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 60px;
+    background: linear-gradient(180deg, rgba(110, 168, 255, .12), rgba(110, 168, 255, 0));
+    pointer-events: none;
+}
+
+.docs-card h2 {
+    margin: 6px 6px 12px;
+    font-size: 20px;
+    letter-spacing: .2px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.docs-card h2::after {
+    content: "";
+    height: 8px;
+    width: 8px;
+    border-radius: 999px;
+    background: var(--docs-accent);
+    box-shadow: 0 0 0 6px var(--docs-accent-soft);
+}
+
+.code {
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 10px;
+    padding: 10px;
+    overflow: auto
+}
+
+.code--docs {
+    background: #0f1532;
+    color: #eef2ff;
+    border: 1px solid #1d2a72;
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13.5px;
+    line-height: 1.6;
+    max-height: min(60vh, 520px);
+    overflow: auto;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .04);
+}
+
+.code--docs::-webkit-scrollbar {
+    height: 10px;
+    width: 10px
+}
+
+.code--docs::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #2a3f9a, #1b2b73);
+    border-radius: 10px;
+    border: 2px solid #0f1532
+}
+
+.code--docs::-webkit-scrollbar-track {
+    background: #0b1026;
+    border-radius: 10px
+}
+
+.docs-card {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.docs-card .btn {
+    padding: 10px 14px;
+    border-radius: 12px
+}
+
+.docs-card .btn.primary {
+    background: linear-gradient(180deg, var(--docs-accent), #4d8cff);
+    color: #0b1020;
+    border: 0;
+    font-weight: 700;
+    letter-spacing: .2px;
+    box-shadow: 0 8px 20px rgba(110, 168, 255, .35)
+}
+
+.footer {
+    padding: 16px;
+    text-align: center;
+    opacity: .8
+}
+
+.mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace
+}
+/* ===== Dark Select / Dropdown Style ===== */
+select {
+    background: rgba(255, 255, 255, .06);     /* กลมกลืนกับ input */
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 9px 12px;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    appearance: auto;                         /* ยังคงใช้ลูกศรของระบบ ไม่ custom */
+}
+
+select:hover {
+    background: rgba(255, 255, 255, .12);
+    border-color: rgba(110, 168, 255, .35);   /* hover เน้นสี accent */
+}
+
+select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(110, 168, 255, .25);
+}
+
+/* ทำให้ option ใน dropdown เป็น dark ด้วย */
+select option {
+    background: var(--panel);                 /* พื้นหลัง dropdown */
+    color: var(--text);
+}
+
+/* เวลา mouse hover บน option (บาง browser รองรับ) */
+select option:hover {
+    background: rgba(110, 168, 255, .25);
+    color: #fff;
+}
+
+/* ============ Chip Toggle (checkbox) ============ */
+.chip-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+}
+.chip-toggle:hover {
+    background: rgba(255, 255, 255, .08);
+    border-color: rgba(110, 168, 255, .35);
+}
+
+.chip-toggle > input[type="checkbox"] {
+    width: 14px;    /* ↓ ปรับขนาด */
+    height: 14px;
+    margin: 0;      /* เอา margin ที่ browser ใส่มาเองออก */
+    transform: translateY(1px);  /* จูนให้ระดับกลางกับข้อความ */
+    cursor: pointer;
+}
+
+
+
+/* ===== StartWhen layout: value ยืด, visible/timeout ลงบรรทัดใหม่ ===== */
+.startwhen{
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  grid-template-areas:
+    "type value"
+    "visible timeout";
+  gap: 10px;
+  align-items: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* map children -> areas (ไม่ต้องแก้ HTML) */
+.startwhen > #edSWType        { grid-area: type;  min-width: 0; }
+.startwhen > #edSWValue       { grid-area: value; min-width: 0; width: 100%; }
+.startwhen > .chip-toggle     { grid-area: visible; align-self: center; justify-self: start; }
+.startwhen > .field.mini      { grid-area: timeout; align-self: center; }
+
+/* ให้ช่อง value อ่านง่ายขึ้น (กว้าง/ฟอนต์/โฟกัส) */
+#edSWValue{
+  padding: 10px 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: .1px;
+}
+#edSWValue:focus{
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(110,168,255,.25);
+}
+
+/* ความสูง element ให้เท่ากันคร่าว ๆ */
+#edSWType,
+#edSWValue,
+#edSWTimeout{
+  height: 36px;
+}
+
+/* ปรับชิป visible ให้สูงเท่าเพื่อน (ไม่แตะ appearance) */
+.chip-toggle{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+}
+.chip-toggle > input[type="checkbox"]{
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  transform: translateY(1px);
+  cursor: pointer;
+}
+
+/* Dropdown ดาร์ก (คงลูกศรเดิม) */
+#edSWType{
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 10px;
+}
+#edSWType:hover{
+  background: rgba(255,255,255,.12);
+  border-color: rgba(110,168,255,.35);
+}
+#edSWType:focus{
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(110,168,255,.25);
+}
+
+/* timeout ช่องเล็ก แต่อ่านชัด */
+#edSWTimeout{
+  width: 100%;
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 10px;
+}
+
+textarea::-webkit-scrollbar {
+  width: 10px; 
+  height: 5px;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: rgb(30 35 49); /* Background of the scrollbar track */
+  border-radius: 10px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background: rgb(50, 58, 80); /* Color of the scrollbar thumb */
+  border-radius: 10px;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background: rgb(12, 15, 26); /* Color of the scrollbar thumb on hover */
+}
+
+.popup-setting {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    color: #e9eeff;
+    font-size: 14px;
+}
+
+/* switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 22px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #555a78;
+    transition: .2s;
+    border-radius: 22px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    left: 2px;
+    bottom: 2px;
+    background: #ffffff;
+    transition: .2s;
+}
+
+input:checked + .slider {
+    background: #6ea8ff;
+}
+
+input:checked + .slider:before {
+    transform: translateX(24px);
+}

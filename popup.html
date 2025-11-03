@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Auto Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        :root {
+            --bg: #0b1020;
+            --card: #111835;
+            --text: #e8eeff;
+            --muted: #a7b0d8;
+            --accent: #6ea8ff;
+            --accent2: #9dd6ff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 14px;
+            width: 320px;
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            background: radial-gradient(1200px 400px at 0% 0%, #12204a 0%, #0b1020 50%, #0b1020 100%);
+            color: var(--text);
+        }
+
+        .card {
+            background: linear-gradient(160deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 14px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(6px);
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: 16px;
+            letter-spacing: .3px;
+        }
+
+        p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        button {
+            flex: 1;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 0;
+            cursor: pointer;
+            color: #0b1020;
+            font-weight: 600;
+            letter-spacing: .2px;
+            transition: transform .05s ease, box-shadow .2s ease;
+            background: linear-gradient(180deg, var(--accent), var(--accent2));
+            box-shadow: 0 6px 16px rgba(110, 168, 255, .35);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        .ghost {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid rgba(255, 255, 255, .18);
+            box-shadow: none;
+        }
+
+        .muted {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: rgba(110, 168, 255, .15);
+            color: var(--accent2);
+            border: 1px solid rgba(110, 168, 255, .3);
+        }
+
+        .mono {
+            font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+            font-size: 11px;
+        }
+
+        .sep {
+            height: 1px;
+            background: rgba(255, 255, 255, .08);
+            margin: 12px 0;
+            border-radius: 999px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Auto Login</h1>
+        <p>จัดการการล็อกอินอัตโนมัติแบบกำหนดขั้นตอนได้เอง</p>
+        <div class="popup-setting">
+            <label class="switch">
+                <input id="toggleExtension" type="checkbox">
+                <span class="slider"></span>
+            </label>
+            <span class="label-text">Auto Login Enabled</span>
+        </div>
+
+
+        <div class="row" style="margin-top:14px;">
+            <button id="openSettings">Open Settings</button>
+            <button class="ghost" id="runFlow">Run Flow</button>
+        </div>
+
+        <div class="sep"></div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="badge" id="matchStatus">Checking…</span>
+            <span class="mono" id="siteName"></span>
+        </div>
+
+        <p class="muted">TIP: ใช้คีย์ลัด <span class="mono">Alt+L</span> เพื่อรัน flow ในแท็บปัจจุบัน</p>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>
