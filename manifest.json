@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Auto Login",
+  "name": "Auto Login — Fill and Login Automatically",
   "version": "1.0.1",
   "permissions": [
     "storage",
