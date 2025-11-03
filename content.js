@@ -61,7 +61,6 @@ async function safeSyncGet(keys) {
     // ใช้รูปแบบ promise ถ้าได้, ถ้าไม่ได้ fallback callback
     if (typeof chrome.storage.sync.get === "function" &&
         chrome.storage.sync.get.length === 1) {
-      // promise-based (ไม่มี callback param)
       return await chrome.storage.sync.get(keys);
     }
     return await new Promise((res) => {
@@ -401,14 +400,6 @@ async function maybeAutoRunOnceForThisHref(src = "unknown") {
       setTimeout(() => maybeAutoRunOnceForThisHref("pageshow-bfcache"), 0);
     }
   });
-
-  // // เมื่อแท็บกลับมา active (บางเว็บ lazy mount DOM) -> ลองอีกครั้ง
-  // document.addEventListener("visibilitychange", () => {
-  //   if (document.visibilityState === "visible") {
-  //     // ไม่บังคับรัน ถ้าเคยรัน visit นี้แล้ว guard ยังอยู่ก็จะไม่ยิงซ้ำ
-  //     setTimeout(() => maybeAutoRunOnceForThisHref("visible"), 0);
-  //   }
-  // });
 })();
 
 /* ---------- manual from popup ---------- */

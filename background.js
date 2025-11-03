@@ -2,7 +2,7 @@ async function triggerRun(tabId) {
   try {
     await chrome.tabs.sendMessage(tabId, { type: 'RUN_FLOW_MANUAL' });
   } catch {
-    // ถ้า content ยังไม่พร้อม ให้ inject (ส่วนใหญ่ไม่จำเป็นเพราะเรามี content script แล้ว)
+    // ถ้า content ยังไม่พร้อม ให้ inject ใหม่
     await chrome.scripting.executeScript({ target: { tabId }, files: ['content.js'] });
     await chrome.tabs.sendMessage(tabId, { type: 'RUN_FLOW_MANUAL' });
   }
