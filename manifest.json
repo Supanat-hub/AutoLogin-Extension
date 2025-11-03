@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Auto Login on Match",
-  "version": "1.0.2",
+  "name": "Auto Login",
+  "version": "1.0.1",
   "permissions": [
     "storage",
     "scripting",
