@@ -291,12 +291,6 @@ document.getElementById("toggleCre").addEventListener("click", () => {
 els.copyPw.addEventListener("click", async () => { try { await navigator.clipboard.writeText(els.userPassword.value); } catch { } });
 els.saveCred.addEventListener("click", async () => {
     await store.setCred(els.userId.value.trim(), els.userPassword.value);
-    try {
-        readEditorToRule();
-        await store.setRules(state.rules);
-        renderRuleList(); renderRaw(); updateCounters();
-        toast("Saved rule.");
-    } catch (_) { }
     toast("Saved credentials.");
 });
 
