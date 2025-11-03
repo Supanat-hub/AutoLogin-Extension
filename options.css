@@ -169,11 +169,12 @@ textarea {
     background: rgba(255, 255, 255, .05);
     color: var(--text);
     outline: none;
-    resize: vertical;
+    resize: none;
     overflow: auto;
 }
 
 textarea.code {
+    resize: vertical !important;
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     font-size: 12px
 }
@@ -725,4 +726,24 @@ input:checked + .slider {
 
 input:checked + .slider:before {
     transform: translateX(24px);
+}
+
+/* ===== Footer Credit (Global) ===== */
+.footer-credit {
+    text-align: center;
+    font-size: 12px;
+    opacity: .65;
+    padding: 16px 0 8px;
+    margin-top: 20px;
+    border-top: 1px solid rgba(255,255,255,.1);
+}
+
+.footer-credit a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer-credit a:hover {
+    text-decoration: underline;
 }

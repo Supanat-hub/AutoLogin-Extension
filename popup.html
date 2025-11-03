@@ -110,6 +110,36 @@
             margin: 12px 0;
             border-radius: 999px;
         }
+
+        /* ===== Footer Credit (Global) ===== */
+        .footer-credit {
+            text-align: center;
+            font-size: 12px;
+            opacity: .65;
+            padding: 16px 0 8px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, .1);
+        }
+
+        .footer-credit a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-credit a:hover {
+            text-decoration: underline;
+        }
+
+        #popupRoot {
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-credit {
+            margin-top: auto;
+        }
     </style>
 </head>
 
@@ -140,6 +170,15 @@
 
         <p class="muted">TIP: ใช้คีย์ลัด <span class="mono">Alt+L</span> เพื่อรัน flow ในแท็บปัจจุบัน</p>
     </div>
+
+    <footer class="footer-credit">
+        <span>Made with ❤️ by
+            <a href="https://github.com/Supanat-hub" target="_blank">@Supanat_hub</a>
+            •
+            <a href="https://www.instagram.com/p.spn_/" target="_blank">@p.spn_</a>
+        </span>
+    </footer>
+
 
     <script src="popup.js"></script>
 </body>
